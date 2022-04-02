@@ -1,5 +1,6 @@
-package com.fullcycle.CatalogoVideo.domain;
+package com.fullcycle.CatalogoVideo.domain.entity;
 
+import com.fullcycle.CatalogoVideo.domain.exception.DomainException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -50,5 +51,15 @@ public class CategoryTest {
         assertEquals(category.getName(), "Name2");
         assertEquals(category.getDescription(), "Description2");
         assertFalse(category.getActive());
+    }
+
+    @Test
+    public void throwDomainExceptionWhenNameIsNull(){
+        assertThrows(DomainException.class, ()-> new Category(null, "Description"));
+    }
+
+    @Test
+    public void throwDomainExceptionWhenNameIsBlank(){
+        assertThrows(DomainException.class, ()-> new Category("", "Description"));
     }
 }

@@ -1,4 +1,7 @@
-package com.fullcycle.CatalogoVideo.domain;
+package com.fullcycle.CatalogoVideo.domain.entity;
+
+import com.fullcycle.CatalogoVideo.domain.exception.NotBlankDomainException;
+import com.fullcycle.CatalogoVideo.domain.exception.NotNullDomainException;
 
 import java.util.UUID;
 
@@ -15,6 +18,13 @@ public class Category {
         this.active();
     }
 
+    public Category (String name, String description, Boolean isActive){
+        this.id = UUID.randomUUID();
+        this.setName(name);
+        this.setDescription(description);
+        this.isActive = isActive ? this.active() : this.deactivate();
+    }
+
     public UUID getId() {
         return id;
     }
@@ -24,8 +34,8 @@ public class Category {
     }
 
     public void setName(String name) {
-        if(name == null) throw new IllegalArgumentException("Can not be null");
-        if(name.isEmpty()) throw new IllegalArgumentException("Can not be blank");
+        if(name == null) throw new NotNullDomainException("Can not be null");
+        if(name.isEmpty()) throw new NotBlankDomainException("Can not be blank");
         this.name = name;
     }
 
