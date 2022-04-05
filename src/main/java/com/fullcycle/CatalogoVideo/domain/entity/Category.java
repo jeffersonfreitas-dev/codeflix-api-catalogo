@@ -25,6 +25,13 @@ public class Category {
         this.isActive = isActive ? this.active() : this.deactivate();
     }
 
+    public Category (UUID id, String name, String description, Boolean isActive){
+        this.id = id;
+        this.setName(name);
+        this.setDescription(description);
+        this.isActive = isActive ? this.active() : this.deactivate();
+    }
+
     public UUID getId() {
         return id;
     }

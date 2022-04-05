@@ -40,7 +40,6 @@ public class FindAllCategoryUseCaseTest {
         );
 
         when(repository.findAll()).thenReturn(categories);
-        repository.findAll();
         List<CategoryOutputData> result = useCase.execute();
 
         assertThat(result).isNotNull();
