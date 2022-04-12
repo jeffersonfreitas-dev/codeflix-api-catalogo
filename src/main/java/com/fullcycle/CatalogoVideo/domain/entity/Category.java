@@ -66,6 +66,7 @@ public class Category {
         return this.isActive = false;
     }
 
+
     public void update(String name, String description, Boolean isActive){
         this.setName(name);
         this.setDescription(description);
