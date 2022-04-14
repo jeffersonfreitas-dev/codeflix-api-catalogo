@@ -1,8 +1,8 @@
 package com.fullcycle.CatalogoVideo.application.category;
 
-import com.fullcycle.CatalogoVideo.application.usercase.category.common.CategoryOutputData;
-import com.fullcycle.CatalogoVideo.application.usercase.category.create.CreateCategoryInputData;
-import com.fullcycle.CatalogoVideo.application.usercase.category.create.CreateCategoryUseCase;
+import com.fullcycle.CatalogoVideo.application.usecase.category.common.CategoryOutputData;
+import com.fullcycle.CatalogoVideo.application.usecase.category.create.CreateCategoryInputData;
+import com.fullcycle.CatalogoVideo.application.usecase.category.create.CreateCategoryUseCase;
 import com.fullcycle.CatalogoVideo.domain.entity.Category;
 import com.fullcycle.CatalogoVideo.domain.repository.ICategoryRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.mockito.ArgumentMatchers.any;

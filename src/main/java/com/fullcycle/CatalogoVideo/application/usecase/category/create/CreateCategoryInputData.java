@@ -1,4 +1,4 @@
-package com.fullcycle.CatalogoVideo.application.usercase.category.create;
+package com.fullcycle.CatalogoVideo.application.usecase.category.create;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

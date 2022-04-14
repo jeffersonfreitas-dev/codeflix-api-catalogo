@@ -1,6 +1,6 @@
-package com.fullcycle.CatalogoVideo.application.usercase.category.findAll;
+package com.fullcycle.CatalogoVideo.application.usecase.category.findAll;
 
-import com.fullcycle.CatalogoVideo.application.usercase.category.common.CategoryOutputData;
+import com.fullcycle.CatalogoVideo.application.usecase.category.common.CategoryOutputData;
 import com.fullcycle.CatalogoVideo.domain.entity.Category;
 import com.fullcycle.CatalogoVideo.domain.repository.ICategoryRepository;
 import lombok.AllArgsConstructor;

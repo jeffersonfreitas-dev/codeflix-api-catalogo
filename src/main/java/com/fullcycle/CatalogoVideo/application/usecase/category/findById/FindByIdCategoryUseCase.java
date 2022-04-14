@@ -1,7 +1,7 @@
-package com.fullcycle.CatalogoVideo.application.usercase.category.findById;
+package com.fullcycle.CatalogoVideo.application.usecase.category.findById;
 
-import com.fullcycle.CatalogoVideo.application.usercase.category.common.CategoryOutputData;
-import com.fullcycle.CatalogoVideo.domain.entity.Category;
+import com.fullcycle.CatalogoVideo.application.exception.NotFoundException;
+import com.fullcycle.CatalogoVideo.application.usecase.category.common.CategoryOutputData;
 import com.fullcycle.CatalogoVideo.domain.repository.ICategoryRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -18,6 +18,6 @@ public class FindByIdCategoryUseCase implements IFindByIdCategoryUseCase{
     public CategoryOutputData execute(UUID uuid) {
         return repository.findById(uuid)
                 .map(CategoryOutputData::fromDomain)
-                .orElseThrow(() -> new IllegalArgumentException("Not Found"));
+                .orElseThrow(() -> new NotFoundException("Category %s not found", uuid));
     }
 }

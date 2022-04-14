@@ -1,7 +1,7 @@
 package com.fullcycle.CatalogoVideo.application.category;
 
-import com.fullcycle.CatalogoVideo.application.usercase.category.common.CategoryOutputData;
-import com.fullcycle.CatalogoVideo.application.usercase.category.findAll.FindAllCategoryUseCase;
+import com.fullcycle.CatalogoVideo.application.usecase.category.common.CategoryOutputData;
+import com.fullcycle.CatalogoVideo.application.usecase.category.findAll.FindAllCategoryUseCase;
 import com.fullcycle.CatalogoVideo.domain.entity.Category;
 import com.fullcycle.CatalogoVideo.domain.repository.ICategoryRepository;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -12,6 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -45,7 +46,17 @@ public class FindAllCategoryUseCaseTest {
         assertThat(result).isNotNull();
         assertThat(result).hasSize(3);
         verify(repository, times(1)).findAll();
+    }
 
+
+    @Test
+    public void shouldReturnEmptyResult(){
+        List<Category> categories = new ArrayList<>();
+        when(repository.findAll()).thenReturn(categories);
+        List<CategoryOutputData> result = useCase.execute();
+        assertThat(result).isNotNull();
+        assertThat(result).hasSize(0);
+        verify(repository, times(1)).findAll();
     }
 
 }

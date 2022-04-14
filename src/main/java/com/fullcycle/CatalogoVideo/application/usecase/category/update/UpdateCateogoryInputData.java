@@ -1,4 +1,4 @@
-package com.fullcycle.CatalogoVideo.application.usercase.category.update;
+package com.fullcycle.CatalogoVideo.application.usecase.category.update;
 
 import lombok.Data;
 

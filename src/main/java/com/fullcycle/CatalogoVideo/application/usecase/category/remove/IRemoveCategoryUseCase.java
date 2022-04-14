@@ -1,4 +1,4 @@
-package com.fullcycle.CatalogoVideo.application.usercase.category.remove;
+package com.fullcycle.CatalogoVideo.application.usecase.category.remove;
 
 import java.util.UUID;
 

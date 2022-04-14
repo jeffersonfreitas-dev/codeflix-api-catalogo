@@ -1,7 +1,8 @@
 package com.fullcycle.CatalogoVideo.application.category;
 
-import com.fullcycle.CatalogoVideo.application.usercase.category.common.CategoryOutputData;
-import com.fullcycle.CatalogoVideo.application.usercase.category.findById.FindByIdCategoryUseCase;
+import com.fullcycle.CatalogoVideo.application.exception.NotFoundException;
+import com.fullcycle.CatalogoVideo.application.usecase.category.common.CategoryOutputData;
+import com.fullcycle.CatalogoVideo.application.usecase.category.findById.FindByIdCategoryUseCase;
 import com.fullcycle.CatalogoVideo.domain.entity.Category;
 import com.fullcycle.CatalogoVideo.domain.repository.ICategoryRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -41,6 +42,16 @@ public class FindByIdCategoryUseCaseTest {
         CategoryOutputData result = useCase.execute(id);
         assertThat(result).isNotNull();
         assertThat(result.getId()).isEqualTo(id);
+    }
+
+    @Test
+    public void shouldReturnErrorWhenIdNotFound(){
+        UUID id = UUID.randomUUID();
+        when(repository.findById(id)).thenReturn(Optional.empty());
+        Throwable result = catchThrowable(() -> useCase.execute(id));
+        assertThat(result).isInstanceOf(NotFoundException.class)
+                .hasMessage("Category %s not found", id);
+        verify(repository, times(1)).findById(id);
     }
 
 }
