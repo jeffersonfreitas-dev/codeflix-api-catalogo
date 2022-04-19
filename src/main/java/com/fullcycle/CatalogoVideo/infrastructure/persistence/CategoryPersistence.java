@@ -1,6 +1,7 @@
 package com.fullcycle.CatalogoVideo.infrastructure.persistence;
 
 import com.fullcycle.CatalogoVideo.domain.entity.Category;
+import com.fullcycle.CatalogoVideo.domain.exception.NotNullDomainException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,6 +31,12 @@ public class CategoryPersistence {
 
     @Column
     private Boolean isActive;
+
+    public static CategoryPersistence from(Category category){
+        if (category == null) throw new NotNullDomainException("Category is null");
+        return new CategoryPersistence(category.getId(), category.getName(),
+                category.getDescription(), category.getActive());
+    }
 
     public Category fromThis(){
         return new Category(getId(), getName(), getDescription(), getIsActive());
