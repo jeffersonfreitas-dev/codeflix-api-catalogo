@@ -14,10 +14,12 @@ import org.springframework.test.context.ActiveProfiles;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.*;
 
 @ActiveProfiles("test")
 @ExtendWith(MockitoExtension.class)
@@ -34,7 +36,7 @@ public class MySQLCategoryRepositoryImplTest {
         Category input = new Category("Action", "Action Description", true);
 
         doReturn(CategoryPersistence.from(expected))
-                .when(repository).save(any(CategoryPersistence.class));
+                .when(repository).save(Mockito.any(CategoryPersistence.class));
         
         Category actual = service.create(input);
 
@@ -58,4 +60,45 @@ public class MySQLCategoryRepositoryImplTest {
 
         assertThat(actual).isNotNull();
      }
+
+    @Test
+    public void findByIdCategory(){
+        Category entity = new Category("Action", "Action Description", true);
+        CategoryPersistence input = CategoryPersistence.from(entity);
+
+        doReturn(Optional.of(input)).when(repository).findById(entity.getId());
+
+        Optional<Category> actual = service.findById(entity.getId());
+
+        assertThat(actual.isPresent()).isTrue();
+        assertThat(actual).isNotNull();
+     }
+
+    @Test
+    public void deleteCategory(){
+        Category entity = new Category("Action", "Action Description", true);
+        doNothing().when(repository).deleteById(entity.getId());
+        service.remove(entity.getId());
+        verify(repository, times(1)).deleteById(entity.getId());
+     }
+
+    @Test
+    public void updateCategory(){
+        Category expected = new Category("Action", "Action Description", true);
+        Category input = new Category("Action", "Action Description", true);
+
+        doReturn(CategoryPersistence.from(expected))
+                .when(repository).save(Mockito.any(CategoryPersistence.class));
+        Category toUpdate = service.create(input);
+
+        toUpdate.update("Action Updated", toUpdate.getDescription(), false);
+        doReturn(CategoryPersistence.from(toUpdate))
+                .when(repository).save((Mockito.any(CategoryPersistence.class)));
+        service.update(toUpdate);
+
+        assertThat(toUpdate).isNotNull();
+        assertThat(toUpdate).hasFieldOrPropertyWithValue("name", "Action Updated");
+        assertFalse(toUpdate.getActive());
+    }
+
 }
